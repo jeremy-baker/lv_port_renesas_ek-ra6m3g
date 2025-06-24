@@ -10,7 +10,6 @@ void board_init(void)
     /* Display off the backlight */
     R_IOPORT_PinWrite(&g_ioport_ctrl, LCD_DISPON, BSP_IO_LEVEL_LOW);
 
-#if 1
     fsp_err_t err;
     err = RM_LVGL_PORT_Open(&g_lvgl_port_ctrl, &g_lvgl_port_cfg);
     if (FSP_SUCCESS != err)
