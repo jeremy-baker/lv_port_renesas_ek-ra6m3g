@@ -1,15 +1,9 @@
 #include <LVGL_thread.h>
 #include "lvgl.h"
 #include "board_init.h"
-#include "lvgl/demos/lv_demos.h"
+#include "demos/lv_demos.h"
 
 
-
-void timer_tick_callback(timer_callback_args_t *p_args)
-{
-    FSP_PARAMETER_NOT_USED(p_args);
-    lv_tick_inc(1);
-}
 
 void vApplicationMallocFailedHook( void )
 {
@@ -21,8 +15,6 @@ void vApplicationMallocFailedHook( void )
 void LVGL_thread_entry(void *pvParameters)
 {
     FSP_PARAMETER_NOT_USED (pvParameters);
-    fsp_err_t err;
-
     lv_init();
 
     board_init();
@@ -48,17 +40,6 @@ void LVGL_thread_entry(void *pvParameters)
     lv_demo_widgets();
 #endif
 
-    err = R_GPT_Open(&g_timer0_ctrl, &g_timer0_cfg);
-    if (FSP_SUCCESS != err)
-    {
-        __BKPT(0);
-    }
-
-    err = R_GPT_Start(&g_timer0_ctrl);
-    if (FSP_SUCCESS != err)
-    {
-        __BKPT(0);
-    }
 
     /* TODO: add your own code here */
     while (1)
